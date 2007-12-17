@@ -14,7 +14,6 @@ BuildRequires:	libggi-devel	>= 2.2.2
 BuildRequires:	chrpath
 %endif
 Requires:	%{libname} = %{version}-%{release}
-BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 
 %description
 LibGGIMisc is a place to put support for graphics target 
