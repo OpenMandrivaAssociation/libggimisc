@@ -106,4 +106,3 @@ chrpath -d %{buildroot}%{_libdir}/ggi/ggimisc/display/pseudo_stubs_ggimisc.so
 %files -n %{staticname}
 %defattr(-,root,root)
 %{_libdir}/*.a
-%{_libdir}/ggi/ggimisc/display/*.a
