@@ -1,10 +1,12 @@
 %define major 2
 %define libname %mklibname ggimisc %{major}
+%define develname %mklibname ggimisc -d
+%define staticname %mklibname ggimisc -d -s
 
 Summary:	Extension to libggi for misc graphics target features
 Name:		libggimisc
 Version:	2.2.2
-Release:	%mkrel 2
+Release:	%mkrel 3
 License:	Public Domain
 Group:		System/Libraries
 Url:		http://www.ggi-project.org/
@@ -32,21 +34,23 @@ Requires:	%{name} = %{version}-%{release}
 %description -n %{libname}
 Main library for libggimisc.
 
-%package -n %{libname}-devel
+%package -n %{develname}
 Summary:	Header files for libggimisc library
 Group:		Development/C
 Requires:	%{libname} = %{version}-%{release}
-Provides:	%{name}-devel
+Provides:	%{name}-devel = %{version}-%{release}
+Obsoletes:	%mklibname ggimisc 2 -d
 
-%description -n %{libname}-devel
+%description -n %{develname}
 Header files for libggimisc library.
 
-%package -n %{libname}-static-devel
+%package -n %{staticname}
 Summary:	Static files for libggimisc library
 Group:		Development/C
 Requires:	%{libname}-devel = %{version}-%{release}
+Obsoletes:	%mklibname ggimisc 2 -d -s
 
-%description -n %{libname}-static-devel
+%description -n %{staticname}
 Static files for libggimisc library.
 
 %prep
@@ -79,29 +83,27 @@ chrpath -d %{buildroot}%{_libdir}/ggi/ggimisc/display/pseudo_stubs_ggimisc.so
 [ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
 
 %files
-%defattr(644,root,root,755)
-%doc COPYING README ChangeLog TODO
+%defattr(-,root,root)
+%doc README ChangeLog TODO
 %config(noreplace) %{_sysconfdir}/ggi/libggimisc.conf
-%attr(755,root,root) %{_libdir}/ggi/ggimisc/display/*.so
-%attr(755,root,root) %{_libdir}/ggi/ggimisc/display/*.la
+%{_libdir}/ggi/ggimisc/display/*.so
+%{_libdir}/ggi/ggimisc/display/*.la
 %{_mandir}/man3/*
 
 %files -n %{libname}
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/*.so.%{major}*
+%defattr(-,root,root)
+%{_libdir}/*.so.%{major}*
 
-%files -n %{libname}-devel
-%defattr(644,root,root,755)
+%files -n %{develname}
+%defattr(-,root,root)
 %doc doc/*.txt
 %{_includedir}/ggi/*.h
 %{_includedir}/ggi/internal/*.h
 %{_libdir}/*.so
-%attr(755,root,root) %{_libdir}/*.la
+%{_libdir}/*.la
 %{_mandir}/man7/*
 
-%files -n %{libname}-static-devel
-%defattr(644,root,root,755)
+%files -n %{staticname}
+%defattr(-,root,root)
 %{_libdir}/*.a
 %{_libdir}/ggi/ggimisc/display/*.a
-
-
