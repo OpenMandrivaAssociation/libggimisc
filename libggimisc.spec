@@ -47,7 +47,7 @@ Header files for libggimisc library.
 %package -n %{staticname}
 Summary:	Static files for libggimisc library
 Group:		Development/C
-Requires:	%{libname}-devel = %{version}-%{release}
+Requires:	%{develname} = %{version}-%{release}
 Obsoletes:	%mklibname ggimisc 2 -d -s
 
 %description -n %{staticname}
