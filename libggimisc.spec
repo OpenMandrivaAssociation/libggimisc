@@ -6,7 +6,7 @@
 Summary:	Extension to libggi for misc graphics target features
 Name:		libggimisc
 Version:	2.2.2
-Release:	%mkrel 5
+Release:	%mkrel 6
 License:	Public Domain
 Group:		System/Libraries
 Url:		http://www.ggi-project.org/
@@ -55,7 +55,6 @@ Static files for libggimisc library.
 
 %prep
 %setup -q
-./autogen.sh
 
 %build
 export echo=echo
