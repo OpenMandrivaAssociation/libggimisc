@@ -6,7 +6,7 @@
 Summary:	Extension to libggi for misc graphics target features
 Name:		libggimisc
 Version:	2.2.2
-Release:	%mkrel 8
+Release:	9
 License:	Public Domain
 Group:		System/Libraries
 Url:		http://www.ggi-project.org/
@@ -16,7 +16,6 @@ BuildRequires:	libggi-devel	>= 2.2.2
 BuildRequires:	chrpath
 %endif
 Requires:	%{libname} = %{version}-%{release}
-BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 
 %description
 LibGGIMisc is a place to put support for graphics target 
@@ -38,7 +37,7 @@ Main library for libggimisc.
 Summary:	Header files for libggimisc library
 Group:		Development/C
 Requires:	%{libname} = %{version}-%{release}
-Provides:	%{name}-devel = %{version}-%{release}
+Provides:	%{name}-devel = %{EVRD}
 Obsoletes:	%mklibname ggimisc 2 -d
 
 %description -n %{develname}
@@ -74,38 +73,68 @@ chrpath -d %{buildroot}%{_libdir}/ggi/ggimisc/display/fbdev_ggimisc.so
 chrpath -d %{buildroot}%{_libdir}/ggi/ggimisc/display/pseudo_stubs_ggimisc.so
 %endif
 
-%if %mdkversion < 200900
-%post -n %{libname} -p /sbin/ldconfig
-%endif
-
-%if %mdkversion < 200900
-%postun -n %{libname} -p /sbin/ldconfig
-%endif
-
-%clean
-[ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
-
 %files
-%defattr(-,root,root)
 %doc README ChangeLog TODO
 %config(noreplace) %{_sysconfdir}/ggi/libggimisc.conf
 %{_libdir}/ggi/ggimisc/display/*.so
-%{_libdir}/ggi/ggimisc/display/*.la
 %{_mandir}/man3/*
 
 %files -n %{libname}
-%defattr(-,root,root)
 %{_libdir}/*.so.%{major}*
 
 %files -n %{develname}
-%defattr(-,root,root)
 %doc doc/*.txt
 %{_includedir}/ggi/*.h
 %{_includedir}/ggi/internal/*.h
 %{_libdir}/*.so
-%{_libdir}/*.la
 %{_mandir}/man7/*
 
 %files -n %{staticname}
-%defattr(-,root,root)
 %{_libdir}/*.a
+
+
+%changelog
+* Fri Dec 10 2010 Oden Eriksson <oeriksson@mandriva.com> 2.2.2-8mdv2011.0
++ Revision: 620124
+- the mass rebuild of 2010.0 packages
+
+* Sun Sep 13 2009 Thierry Vignaud <tv@mandriva.org> 2.2.2-7mdv2010.0
++ Revision: 438603
+- rebuild
+
+* Thu Mar 26 2009 Frederic Crozat <fcrozat@mandriva.com> 2.2.2-6mdv2009.1
++ Revision: 361342
+- Fix build
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - rebuild
+
+  + Funda Wang <fwang@mandriva.org>
+    - fix requires
+
+  + Pixel <pixel@mandriva.com>
+    - do not call ldconfig in %%post/%%postun, it is now handled by filetriggers
+
+* Mon Feb 25 2008 Tomasz Pawel Gajc <tpg@mandriva.org> 2.2.2-3mdv2008.1
++ Revision: 174780
+- new devel library policy
+- spec file clean
+
+  + Olivier Blin <oblin@mandriva.com>
+    - restore BuildRoot
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - kill re-definition of %%buildroot on Pixel's request
+
+
+* Fri Feb 23 2007 Tomasz Pawel Gajc <tpg@mandriva.org> 2.2.2-2mdv2007.0
++ Revision: 125160
+- fix dependencies
+
+* Fri Feb 23 2007 Tomasz Pawel Gajc <tpg@mandriva.org> 2.2.2-1mdv2007.1
++ Revision: 125108
+- add missing buildrequires
+- make it work
+- remove rpath
+- Import libggimisc
+
