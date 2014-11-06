@@ -6,7 +6,7 @@
 Summary:	Extension to libggi for misc graphics target features
 Name:		libggimisc
 Version:	2.2.2
-Release:	9
+Release:	10
 License:	Public Domain
 Group:		System/Libraries
 Url:		http://www.ggi-project.org/
@@ -58,7 +58,7 @@ Static files for libggimisc library.
 %build
 export echo=echo
 
-%configure2_5x
+%configure
 
 %make
 
@@ -91,50 +91,3 @@ chrpath -d %{buildroot}%{_libdir}/ggi/ggimisc/display/pseudo_stubs_ggimisc.so
 
 %files -n %{staticname}
 %{_libdir}/*.a
-
-
-%changelog
-* Fri Dec 10 2010 Oden Eriksson <oeriksson@mandriva.com> 2.2.2-8mdv2011.0
-+ Revision: 620124
-- the mass rebuild of 2010.0 packages
-
-* Sun Sep 13 2009 Thierry Vignaud <tv@mandriva.org> 2.2.2-7mdv2010.0
-+ Revision: 438603
-- rebuild
-
-* Thu Mar 26 2009 Frederic Crozat <fcrozat@mandriva.com> 2.2.2-6mdv2009.1
-+ Revision: 361342
-- Fix build
-
-  + Thierry Vignaud <tv@mandriva.org>
-    - rebuild
-
-  + Funda Wang <fwang@mandriva.org>
-    - fix requires
-
-  + Pixel <pixel@mandriva.com>
-    - do not call ldconfig in %%post/%%postun, it is now handled by filetriggers
-
-* Mon Feb 25 2008 Tomasz Pawel Gajc <tpg@mandriva.org> 2.2.2-3mdv2008.1
-+ Revision: 174780
-- new devel library policy
-- spec file clean
-
-  + Olivier Blin <oblin@mandriva.com>
-    - restore BuildRoot
-
-  + Thierry Vignaud <tv@mandriva.org>
-    - kill re-definition of %%buildroot on Pixel's request
-
-
-* Fri Feb 23 2007 Tomasz Pawel Gajc <tpg@mandriva.org> 2.2.2-2mdv2007.0
-+ Revision: 125160
-- fix dependencies
-
-* Fri Feb 23 2007 Tomasz Pawel Gajc <tpg@mandriva.org> 2.2.2-1mdv2007.1
-+ Revision: 125108
-- add missing buildrequires
-- make it work
-- remove rpath
-- Import libggimisc
-
